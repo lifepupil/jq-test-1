@@ -7,7 +7,7 @@ var respArr = [];
 
 function init() {
   $('#getRandNums').click(getRandom);
-
+  $('#evens').on('click', '.evens', squareEvens);
 
 }
 
@@ -27,16 +27,53 @@ function getRandom() {
 
 function setGlobalVariable(arr) {
   respArr = arr;
-  // console.log(respArr);
+  displayEvens();
+  displayOdds();
+
+
 }
 
 function displayEvens() {
   for (var i = 0 ; i<respArr.length ; i++) {
-    console.log(respArr[i]);
-    // var $div = $('<div>');
-    // $('#evens').append($div);
-    // $disc.width(discWidth);
-    // $disc.text(i);
+    var $div = $('<div>');
+
+    $div.addClass('evens');
+    $div.text(respArr[i]);
+    $('#evens').append($div);
+  }
+}
+
+function squareEvens() {
+  var $source = $(this);
+  var squared = Math.sqrt($source.text() * 1);
+  $source.text(squared);
+}
+
+function displayOdds() {
+  var $threes = $('<div>');
+  var $others = $('<div>');
+
+  $threes.addClass('threes');
+  $others.addClass('others');
+
+  var threesStr = '';
+  var othersStr = '';
+
+  for (var i = 0 ; i<respArr.length ; i++) {
+    var thisNum = respArr[i] * 1;
+    if (thisNum%3 === 0) {
+      threesStr += " "+thisNum+" "
+    } else {
+      othersStr += " "+thisNum+" "
+    }
+
+    $threes.text(threesStr);
+    $('#odds').append($threes);
+
+    $others.text(othersStr);
+    $('#odds').append($others);
 
   }
+
+
 }
